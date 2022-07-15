@@ -1,0 +1,26 @@
+{
+  "name": "milestone-online-shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prasenjit-3433/Basic-Online-Shop.git"
+  },
+  "keywords": [],
+  "author": "Prasenjit Sutradhar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Prasenjit-3433/Basic-Online-Shop/issues"
+  },
+  "homepage": "https://github.com/Prasenjit-3433/Basic-Online-Shop#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
