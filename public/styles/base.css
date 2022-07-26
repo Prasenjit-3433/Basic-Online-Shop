@@ -75,5 +75,5 @@ a {
 
 .btn:hover, .btn:active {
     background-color: var(--color-primary-700);
-    /* border-color: var(--color-primary-700); */
+    border-color: var(--color-primary-700);
 }
