@@ -9,6 +9,8 @@ const db = require("./data/database");
 const addCsrfTokenMiddleware = require('./middlewares/csrf-token');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 const authRoutes = require("./routes/auth.routes");
+const productsRoutes = require('./routes/products.routes');
+const baseRoutes = require('./routes/base.routes');
 
 const app = express();
 
@@ -26,7 +28,9 @@ app.use(csrf());
 // it should appear after csrf middleware as we csrfToken method on req object to generate token:
 app.use(addCsrfTokenMiddleware);
 
+app.use(baseRoutes);
 app.use(authRoutes);
+app.use(productsRoutes);
 
 app.use(errorHandlerMiddleware);
 

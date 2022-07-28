@@ -14,6 +14,11 @@ class User {
         };
     }
 
+    getUserWithSameEmail() {
+        // we're not returning the result of that async task, instead returning the promise object itself:
+        return db.getDb().collection('users').findOne({email: this.email});
+    }
+
     async signup() {
         const hashedPassword = await bcrypt.hash(this.password, 12);
 
@@ -23,6 +28,11 @@ class User {
             name: this.name,
             address: this.address
         });
+    }
+
+    hasMatchingPassword(hashedPassword) {
+        // we're not returning the result of that async task, instead returning the promise object itself:
+        return bcrypt.compare(this.password, hashedPassword);
     }
 }
 
