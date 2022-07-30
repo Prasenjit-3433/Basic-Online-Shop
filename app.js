@@ -20,6 +20,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
+// '/products/assets' is omitted from the request's url:
+app.use('/products/assets', express.static('product-data'));
 app.use(express.urlencoded({extended: false}));
 
 const sessionConfig = createSessionConfig();
