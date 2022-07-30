@@ -12,6 +12,7 @@ const checkAuthStatusMiddleware = require('./middlewares/check-auth');
 const authRoutes = require("./routes/auth.routes");
 const productsRoutes = require('./routes/products.routes');
 const baseRoutes = require('./routes/base.routes');
+const adminRoutes = require('./routes/admin.routes');
 
 const app = express();
 
@@ -34,6 +35,12 @@ app.use(checkAuthStatusMiddleware);
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
+app.use('/admin', adminRoutes);  
+
+// Note: only requests with a path that starts with '/admin' will make it into to the adminRoutes and this starting
+//       path '/admin' is then removed from the path of request. So that inside of the file adminRoutes, we can
+//       have the rest of the path..... 
+//       e.g: '/admin/products' --> 'products' ; '/admin/products/new' --> '/products/new'
 
 app.use(errorHandlerMiddleware);
 
