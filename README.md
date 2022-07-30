@@ -17,3 +17,8 @@
                                 *** When we pass `error` to `next` and execute next like this: next(error);
                                     the default-error-handling middleware will become active.
                                 
+6. Adding CSRF Token in the form that uploads a file:
+         When working with form that contains a file, you have to add the CSRF Token as a `query parameter` on the URl 
+         the request is send to. You can add query param by adding an `?` at the end of url, follwed by param-name &
+         value as key-value pair.
+         e.g: /admin/products?_csrf=<%= locals.csrfToken %>

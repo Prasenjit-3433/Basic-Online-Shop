@@ -5,7 +5,10 @@
     <%- include('../../shared/includes/header') %> 
     <main>
         <h1>Add New Product</h1>
-        <form action="">
+
+        <!-- When working with form that contains a file, you have to add the CSRF Token as a query param on the URl 
+             the request is send to -->
+        <form action="/admin/products?_csrf=<%= locals.csrfToken %>" method="POST" enctype="multipart/form-data">
             <p>
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title" required>
