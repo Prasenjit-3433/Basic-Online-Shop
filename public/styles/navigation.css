@@ -52,12 +52,13 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border: none;
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--border-radius-small);
   cursor: pointer;
   width: 2.25rem;
   height: 2.25rem;
   background-color: transparent;
-  padding: 0;
+  padding: 5px;
 }
 
 #mobile-menu-btn span {
