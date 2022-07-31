@@ -1,3 +1,6 @@
+const { ObjectID } = require('bson');
+const mongodb = require('mongodb');
+
 const db = require('../data/database');
 
 class Product {
@@ -14,11 +17,33 @@ class Product {
         }
     }
 
+    static async findById(productId) {
+        let prodId;
+
+        try {
+            prodId = new mongodb.ObjectId(productId);
+        }catch(error) {
+            error.code = 404;
+            throw error;
+        }
+        
+        const product = await db.getDb().collection('products').findOne({_id: prodId});
+
+        if (!product) {
+            const error = new Error('Could not find a product with provided Id');
+            error.code = 404;
+            throw error;
+        }
+        
+        return product;
+    }
+
     static async findAll() {
         const products = await db.getDb().collection('products').find().toArray();
 
-        // Any array in JS has the `map` method which takes a function that is executed for every item in that array
-        // then every item is replaced by the result of calling that function:
+        // Any array in JS has the `map` method which takes a function that is executed for every item in that array.
+        // then creates a temporaray array with the object returned as the result of calling that function. The actual 
+        // array remains as it is Instead a new array is created and returned:
         return products.map(function(productDocument) {
             return new Product(productDocument);
         });

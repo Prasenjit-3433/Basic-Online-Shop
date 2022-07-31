@@ -11,6 +11,10 @@ router.get('/products', adminController.getProducts);
 // request handler for --> /admin/products/new'
 router.get('/products/new', adminController.getNewProducts);
 
-router.post('/products', imageUploadMiddleware, adminController.createNewProduct)
+router.post('/products', imageUploadMiddleware, adminController.createNewProduct);
+
+router.get('/products/:id', adminController.getUpdateProduct);
+
+router.post('/products/:id', adminController.updateProduct);
 
 module.exports = router;
