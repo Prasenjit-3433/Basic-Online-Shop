@@ -1,3 +1,4 @@
+const { request } = require('express');
 const { Db } = require('mongodb');
 const Product = require('../models/product.model');
 
@@ -41,7 +42,24 @@ async function getUpdateProduct(req, res, next) {
 
 }
 
-function updateProduct() {}
+async function updateProduct(req, res, next) {
+    const product = new Product({
+        ...req.body,
+        _id: req.params.id
+    });
+
+    if (req.file) {
+        product.replaceImage(req.file.filename);
+    }
+
+    try {
+        await product.save();
+    }catch(error) {
+        return next(error);
+    }
+
+    res.redirect('/admin/products');
+}
 
 module.exports = {
     getProducts: getProducts,

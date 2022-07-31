@@ -10,6 +10,7 @@
     text-align: center;
     background-color: var(--color-gray-600);
     overflow: hidden;
+    height: 100%;
 }
 
 .product-item img {

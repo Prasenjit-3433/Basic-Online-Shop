@@ -1,5 +1,6 @@
 <%- include('../../shared/includes/head', {pageTitle: 'Add New Product'}) %>
     <link rel="stylesheet" href="/styles/forms.css">
+    <script src="/scripts/image-preview.js" defer></script>
 </head>
 <body>
     <%- include('../../shared/includes/header') %> 
@@ -13,6 +14,7 @@
                 summary: '',
                 price: '',
                 description: ''
-             }}) %>
+             },
+             imageRequired: true}) %>
     </main>
 <%- include('../../shared/includes/footer') %> 

@@ -22,3 +22,7 @@
          the request is send to. You can add query param by adding an `?` at the end of url, follwed by param-name &
          value as key-value pair.
          e.g: /admin/products?_csrf=<%= locals.csrfToken %>
+
+7. *** Keep in mind that without `Multer` being involved, no body data is parsed Because the default body parser for 
+       form data does not work when `enctype` = 'multipart/form-data'. So don't forget to add multer middleware in 
+       the post route of the forms that contain any kind of file upload.
