@@ -61,10 +61,26 @@ async function updateProduct(req, res, next) {
     res.redirect('/admin/products');
 }
 
+async function deleteProduct(req, res, next) {
+    try {
+        const product = await Product.findById(req.params.id);
+        await product.remove();
+    } catch (error) {
+        return next(error);
+    }
+    
+    // As a response for frontend based js request, we don't load a new page instead stay on the same page:
+    // res.redirect('/admin/products');
+
+    // Instead we can send a response in Json format:
+    res.json({message: 'Deleted product!'});
+}
+
 module.exports = {
     getProducts: getProducts,
     getNewProducts: getNewProducts,
     createNewProduct: createNewProduct,
     getUpdateProduct: getUpdateProduct,
-    updateProduct: updateProduct
+    updateProduct: updateProduct,
+    deleteProduct: deleteProduct
 };

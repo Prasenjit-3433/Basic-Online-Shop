@@ -26,3 +26,11 @@
 7. *** Keep in mind that without `Multer` being involved, no body data is parsed Because the default body parser for 
        form data does not work when `enctype` = 'multipart/form-data'. So don't forget to add multer middleware in 
        the post route of the forms that contain any kind of file upload.
+
+8. Note: with the help of links and forms, we can send only `GET` & `POST` request to server. We can't send `PUT`, 
+         `PATCH`, `DELETE` requests. It can be done with browser side javascript.
+         *** Don't forget to add CSRF Token in the url as a query parameter.
+
+9. Note: There are some naming convension for `data-` attribute in the html element.
+         Like: data-productId ---> not correct
+               data-productid ---> correct
