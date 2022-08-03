@@ -30,6 +30,35 @@ class Cart {
         this.totalQuantity += 1;
         this.totalPrice += product.price;
     }
+
+    updateItem(productId, newQuantity) {
+
+        for (let i = 0; i < this.items.length; i++) {
+            const item = this.items[i];
+
+            if (item.product.id === productId && newQuantity > 0) {
+                const cartItem = {...item};
+                const quantityChange = newQuantity - item.quantity;
+                cartItem.quantity = newQuantity;
+                cartItem.totalPrice = newQuantity * item.product.price;
+                this.items[i] = cartItem;
+
+                this.totalQuantity += quantityChange;
+                this.totalPrice += quantityChange * item.product.price;
+                return {updatedItemPrice: cartItem.totalPrice};
+            }else if(item.product.id === productId) {
+
+                // 1st arg is the zero-based position from which to start removing elements and 
+                // 2nd arg is the number of elements to remove:
+                this.items.splice(i, 1);
+
+                this.totalQuantity -= item.quantity;
+                this.totalPrice -= item.totalPrice;
+
+                return {updatedItemPrice: 0};
+            }
+        }
+    }
 }
 
 
