@@ -11,6 +11,7 @@ const errorHandlerMiddleware = require('./middlewares/error-handler');
 const checkAuthStatusMiddleware = require('./middlewares/check-auth');
 const protectRoutesMiddleware = require('./middlewares/protect-routes');
 const cartMiddleware = require('./middlewares/cart');
+const updateCartPricesMiddleware = require('./middlewares/update-cart-prices');
 const authRoutes = require("./routes/auth.routes");
 const productsRoutes = require('./routes/products.routes');
 const baseRoutes = require('./routes/base.routes');
@@ -35,6 +36,7 @@ app.use(csrf());
 
 // Must appear after the session middleware because it uses session under the hoods:
 app.use(cartMiddleware);
+app.use(updateCartPricesMiddleware);
 
 // it should appear after csrf middleware as we csrfToken() method on req object to generate token:
 app.use(addCsrfTokenMiddleware);
