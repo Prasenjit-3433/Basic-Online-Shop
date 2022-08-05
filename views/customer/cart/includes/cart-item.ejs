@@ -1,11 +1,23 @@
 <article class="cart-item">
-    <div class="cart-item-info">
-        <h2><%= item.product.title %></h2>
-        <p>Subtotal: $<span class="cart-item-price"><%= item.totalPrice.toFixed(2) %></span>  <span class="cart-product-price">($<%= item.product.price.toFixed(2) %> per piece)</span></p>
-    </div>
+  <div class="cart-item-info">
+    <h2><%= item.product.title %></h2>
+    <p>
+      Subtotal: $<span class="cart-item-price"
+        ><%= item.totalPrice.toFixed(2) %></span
+      >
+      <span class="cart-product-price"
+        >($<%= item.product.price.toFixed(2) %> per piece)</span
+      >
+    </p>
+  </div>
 
-    <form class="cart-item-management" data-productid="<%= item.product.id %>" data-csrf="<%= locals.csrfToken %>">
-        <input type="number" min="0" value="<%= item.quantity %>" required>
-        <button class="btn btn-alt">UPDATE</button>
-    </form>
+  <form
+    class="cart-item-management"
+    data-productid="<%= item.product.id %>"
+    data-csrf="<%= locals.csrfToken %>"
+    data-isauth="<%= isAuth %>"
+  >
+    <input type="number" min="0" value="<%= item.quantity %>" required />
+    <button class="btn btn-alt">UPDATE</button>
+  </form>
 </article>

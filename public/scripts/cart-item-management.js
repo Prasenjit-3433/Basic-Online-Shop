@@ -2,6 +2,8 @@ const cartItemUpdateFormElements = document.querySelectorAll('.cart-item-managem
 const cartTotalPriceElement = document.getElementById('cart-total-price');
 // cart-badge for both mobile and desktop header
 const cartBadges= document.querySelectorAll('.nav-items .badge');
+const buyProductsBtnElement = document.getElementById('place-order-btn');
+const btnFormElement = document.getElementById('btn-form');
 
 async function updateCartItem(event) {
     event.preventDefault();
@@ -10,6 +12,7 @@ async function updateCartItem(event) {
 
     const productId = form.dataset.productid;
     const csrfToken = form.dataset.csrf;
+    const isAuth = form.dataset.isauth;
     const quantity = form.firstElementChild.value;
 
     let response;
@@ -37,7 +40,6 @@ async function updateCartItem(event) {
     }
 
     const responseData = await response.json();
-    console.log(responseData);
 
     if (responseData.updatedCartData.updatedItemPrice === 0) {
         form.parentElement.parentElement.remove();
@@ -48,7 +50,15 @@ async function updateCartItem(event) {
 
     cartTotalPriceElement.textContent = responseData.updatedCartData.newTotalPrice.toFixed(2);
 
-
+    if (isAuth && !responseData.updatedCartData.newTotalPrice > 0) {
+        buyProductsBtnElement.style.display = 'none';
+        addItemBtnElement = document.createElement('a');
+        addItemBtnElement.textContent = 'Add items';
+        addItemBtnElement.classList.add('btn');
+        addItemBtnElement.classList.add('btn-alt');
+        addItemBtnElement.setAttribute('href', '/');
+        btnFormElement.appendChild(addItemBtnElement);
+    }
 
     for (const cartBadge of cartBadges) {
         cartBadge.textContent = responseData.updatedCartData.newTotalQuantity;

@@ -9,7 +9,7 @@
         <ul id="cart-items">
             <% for (const cartItem of locals.cart.items) { %> 
                 <li>
-                    <%- include('includes/cart-item', {item: cartItem}) %> 
+                    <%- include('includes/cart-item', {item: cartItem, isAuth: locals.isAuth}) %> 
                 </li>
             <% } %> 
         </ul>
@@ -17,11 +17,15 @@
             <p>Total: $<span id="cart-total-price"><%= locals.cart.totalPrice.toFixed(2) %></span></p>
 
             <% if (locals.isAuth) { %>
-                <form action="/orders" method="POST">
+                <form id="btn-form" action="/orders" method="POST">
                     <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
-                    <button class="btn">Buy Products</button>
+                    <% if (locals.cart.totalQuantity > 0) {%> 
+                        <button class="btn" id="place-order-btn">Buy Products</button>
+                    <% }else { %> 
+                    <a href="/" class="btn btn-alt">Add items</a>
+                    <% } %> 
                 </form>
-            <% }else { %>  
+            <% }else if (!locals.isAuth) { %>  
                 <a href="/login" class="btn btn-alt">Login to proceed</a>
             <% } %> 
             
