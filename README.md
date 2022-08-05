@@ -34,3 +34,9 @@
 9. Note: There are some naming convension for `data-` attribute in the html element.
          Like: data-productId ---> not correct
                data-productid ---> correct
+
+10. Working with stripe: Stripe offers two types of api:
+                         1. The package based api which we'll use in our code.
+                         2. The URL-based api to which the package talks.
+                         Stripe doesn't allow us to directly send HTTP requests to the URl-based api,
+                         Instead the package we installed in our project sends the request to the url behind the scenes.
